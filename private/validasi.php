@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
                 header:
                 $stmt->execute();
                 header(header: "Location: ../index?status=success");
+                kirimForm();
             } elseif (!$is_valid){
                 header(header: "Location: ../lapor.php?nomor=$nomor&nama=$nama&namaError=$namaError&email=$email&emailError=$emailError&telepon=$telpon&telponError=$telponError&alamat=$alamat&alamatError=$alamatError&pengaduan=$pengaduan&pengaduanError=$pengaduanError&captcha=$captcha&capthcaError=$captchaError");
             }

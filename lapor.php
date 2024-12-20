@@ -81,131 +81,133 @@ if ($statement->rowCount() < 1) {
             <hr />
             <div class="row">
                 <div class="col-md-8 card-shadow-2 form-custom">
-                    <form class="form-horizontal" role="form" method="post" action="private/validasi" enctype="multipart/form-data">                        
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Nomor Pengaduan</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-exclamation-sign"></span></div>
-                                    <input type="text" class="form-control" id="nomor" name="nomor" value="<?php echo $max_id; ?>" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="nama" class="col-sm-3 control-label">Nama</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" value="<?= @$_GET['nama'] ?>" required>
-                                </div>
-                                <p class="error"><?= @$_GET['namaError'] ?></p>
-                            </div>
-                        </div>
+                    <form id="email-form"class="form-horizontal" role="form" method="post" action="private/validasi"  enctype="multipart/form-data">                        
                         
-                        <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label">Email</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                                    <input type="email" class="form-control" id="to_email" name="email" placeholder="example@domain.com" value="<?= @$_GET['email'] ?>" required>
+                            <div class="form-group">
+                                <label for="nomor" class="col-sm-3 control-label">Nomor Pengaduan</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-exclamation-sign"></span></div>
+                                        <input type="text" class="form-control" id="nomor" name="nomor" value="<?php echo $max_id; ?>" readonly>
+                                    </div>
                                 </div>
-                                <p class="error"><?= @$_GET['emailError'] ?></p>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="telpon" class="col-sm-3 control-label">Telpon</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
-                                    <input type="text" class="form-control" id="telpon" name="telpon" placeholder="087123456789" value="<?= @$_GET['telpon'] ?>" required>
+                            <div class="form-group">
+                                <label for="nama" class="col-sm-3 control-label">Nama</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" value="<?= @$_GET['nama'] ?>" required>
+                                    </div>
+                                    <p class="error"><?= @$_GET['namaError'] ?></p>
                                 </div>
-                                <p class="error"><?= @$_GET['telponError'] ?></p>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="alamat" class="col-sm-3 control-label">Alamat</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                                    <input id="alamat" type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?= @$_GET['alamat'] ?>" required>
+                            
+                            <div class="form-group">
+                                <label for="email" class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                                        <input type="email" class="form-control" id="to_email" name="email" placeholder="example@domain.com" value="<?= @$_GET['email'] ?>" required>
+                                    </div>
+                                    <p class="error"><?= @$_GET['emailError'] ?></p>
                                 </div>
-                                <p class="error"><?= @$_GET['alamatError'] ?></p>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <!-- <label for="tujuan" class="col-sm-3 control-label">Tujuan Pengaduan</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-random"></span></div>
-                                    <select class="form-control" name="tujuan" id="tujuan">   
-                                        <option value="1">Pengaduan Masyarakat</option>
-                                        <option value="2">Pengelolaan Sumber Daya Masyarakat</option>
-                                    </select>  
+                            <div class="form-group">
+                                <label for="telpon" class="col-sm-3 control-label">Telpon</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
+                                        <input type="text" class="form-control" id="telpon" name="telpon" placeholder="087123456789" value="<?= @$_GET['telpon'] ?>" required>
+                                    </div>
+                                    <p class="error"><?= @$_GET['telponError'] ?></p>
                                 </div>
-                            </div> -->
-                            <label for="tujuan" class="col-sm-3 control-label">Tujuan</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                                    <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Tujuan" value="<?= @$_GET['tujuan'] ?>" required>
-                                </div>
-                                <p class="error"><?= @$_GET['namaError'] ?></p>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="alamat" class="col-sm-3 control-label">Alamat</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                                        <input id="alamat" type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?= @$_GET['alamat'] ?>" required>
+                                    </div>
+                                    <p class="error"><?= @$_GET['alamatError'] ?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!-- <label for="tujuan" class="col-sm-3 control-label">Tujuan Pengaduan</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-random"></span></div>
+                                        <select class="form-control" name="tujuan" id="tujuan">   
+                                            <option value="1">Pengaduan Masyarakat</option>
+                                            <option value="2">Pengelolaan Sumber Daya Masyarakat</option>
+                                        </select>  
+                                    </div>
+                                </div> -->
+                                <label for="tujuan" class="col-sm-3 control-label">Tujuan</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                        <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Tujuan" value="<?= @$_GET['tujuan'] ?>" required>
+                                    </div>
+                                    <p class="error"><?= @$_GET['namaError'] ?></p>
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="foto" class="col-sm-3 control-label">Upload Foto</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-camera"></span></div>
-                                    <input type="file" class="form-control" id="foto" name="foto" placeholder="Upload Foto" value="<?= @$_GET['foto'] ?>" required>
+                            <div class="form-group">
+                                <label for="foto" class="col-sm-3 control-label">Upload Foto</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-camera"></span></div>
+                                        <input type="file" class="form-control" id="foto" name="foto" placeholder="Upload Foto" value="<?= @$_GET['foto'] ?>" required>
+                                    </div>
+                                    <p class="error"><?= @$_GET['fotoError'] ?></p>
                                 </div>
-                                <p class="error"><?= @$_GET['fotoError'] ?></p>
-                            </div>
-                        </div>
-                       
-                        <div class="form-group">
-                            <label for="pengaduan" class="col-sm-3 control-label">Isi Pengaduan</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                                    <textarea id="pengaduan" class="form-control" rows="4" name="pengaduan" placeholder="Tuliskan Isi Pengaduan" required><?= @$_GET['pengaduan'] ?></textarea>
-                                </div>
-                                <p class="error"><?= @$_GET['pengaduanError'] ?></p>
-                            </div>
-                        </div>
-                       
-                        <div class="form-group">
-                            <label for="captcha" class="col-sm-3 control-label">Captcha</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <!--menampilkan gambar captcha-->
-                                    <img class="card-shadow-2" src="private/captcha.php" /> <br />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="captcha" class="col-sm-3 control-label"></label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="glyphicon glyphicon-open"></span></div>
-                                    <input type="text" class="form-control" id="captcha" name="captcha" placeholder="Masukkan Captcha di Atas" value="<?= @$_GET['captcha'] ?>" required>
-                                </div>
-                                <p class="error"><?= @$_GET['captchaError'] ?></p>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-3">
-                                <input id="submit" name="submit" type="submit" value="Kirim Pengaduan" class="btn btn-primary-custom form-shadow">
                             </div>
                         
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <p class="error"><em>* Catat Nomor Pengaduan Untuk Melihat Status Pengaduan</em></p>
+                            <div class="form-group">
+                                <label for="pengaduan" class="col-sm-3 control-label">Isi Pengaduan</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                                        <textarea id="pengaduan" class="form-control" rows="4" name="pengaduan" placeholder="Tuliskan Isi Pengaduan" required><?= @$_GET['pengaduan'] ?></textarea>
+                                    </div>
+                                    <p class="error"><?= @$_GET['pengaduanError'] ?></p>
+                                </div>
                             </div>
-                        </div>
+                        
+                            <div class="form-group">
+                                <label for="captcha" class="col-sm-3 control-label">Captcha</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <!--menampilkan gambar captcha-->
+                                        <img class="card-shadow-2" src="private/captcha.php" /> <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="captcha" class="col-sm-3 control-label"></label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-open"></span></div>
+                                        <input type="text" class="form-control" id="captcha" name="captcha" placeholder="Masukkan Captcha di Atas" value="<?= @$_GET['captcha'] ?>" required>
+                                    </div>
+                                    <p class="error"><?= @$_GET['captchaError'] ?></p>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-3">
+                                    <input  id="submit" name="submit" type="submit" value="Kirim Pengaduan" class="btn btn-primary-custom form-shadow">
+                                </div>
+                            
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <p class="error"><em>* Catat Nomor Pengaduan Untuk Melihat Status Pengaduan</em></p>
+                                </div>
+                            </div>
+                        
                 </form>
                 </div>
                 <div class="col-md-4"></div>
@@ -233,6 +235,8 @@ if ($statement->rowCount() < 1) {
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
                 }
+
+
             </script>
             <!-- link to top -->
             <!-- JS Emailjs -->

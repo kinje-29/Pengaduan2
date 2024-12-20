@@ -245,7 +245,7 @@ if ($id_admin > 0) {
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
+                                    <th>Nama Saya</th>
                                     <th>Email</th>
                                     <th>Telpon</th>
                                     <th>Alamat</th>
