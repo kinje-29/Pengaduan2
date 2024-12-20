@@ -75,13 +75,13 @@ if ($statement->rowCount() < 1) {
 
 
         <!-- content -->
-        <div class="main-content">
-
+    <div class="main-content">
+        
             <h3>Buat Laporan</h3>
             <hr />
             <div class="row">
                 <div class="col-md-8 card-shadow-2 form-custom">
-                    <form class="form-horizontal" role="form" method="post" action="private/validasi" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" method="post" action="private/validasi" enctype="multipart/form-data">                        
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Nomor Pengaduan</label>
                             <div class="col-sm-9">
@@ -101,12 +101,13 @@ if ($statement->rowCount() < 1) {
                                 <p class="error"><?= @$_GET['namaError'] ?></p>
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <label for="email" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-9">
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value="<?= @$_GET['email'] ?>" required>
+                                    <input type="email" class="form-control" id="to_email" name="email" placeholder="example@domain.com" value="<?= @$_GET['email'] ?>" required>
                                 </div>
                                 <p class="error"><?= @$_GET['emailError'] ?></p>
                             </div>
@@ -126,23 +127,32 @@ if ($statement->rowCount() < 1) {
                             <div class="col-sm-9">
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                                    <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?= @$_GET['alamat'] ?>" required>
+                                    <input id="alamat" type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?= @$_GET['alamat'] ?>" required>
                                 </div>
                                 <p class="error"><?= @$_GET['alamatError'] ?></p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="tujuan" class="col-sm-3 control-label">Tujuan Pengaduan</label>
+                            <!-- <label for="tujuan" class="col-sm-3 control-label">Tujuan Pengaduan</label>
                             <div class="col-sm-9">
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-random"></span></div>
-                                    <select class="form-control" name="tujuan">   
+                                    <select class="form-control" name="tujuan" id="tujuan">   
                                         <option value="1">Pengaduan Masyarakat</option>
                                         <option value="2">Pengelolaan Sumber Daya Masyarakat</option>
                                     </select>  
                                 </div>
+                            </div> -->
+                            <label for="tujuan" class="col-sm-3 control-label">Tujuan</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                    <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Tujuan" value="<?= @$_GET['tujuan'] ?>" required>
+                                </div>
+                                <p class="error"><?= @$_GET['namaError'] ?></p>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="foto" class="col-sm-3 control-label">Upload Foto</label>
                             <div class="col-sm-9">
@@ -153,16 +163,18 @@ if ($statement->rowCount() < 1) {
                                 <p class="error"><?= @$_GET['fotoError'] ?></p>
                             </div>
                         </div>
+                       
                         <div class="form-group">
                             <label for="pengaduan" class="col-sm-3 control-label">Isi Pengaduan</label>
                             <div class="col-sm-9">
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                                    <textarea class="form-control" rows="4" name="pengaduan" placeholder="Tuliskan Isi Pengaduan" required><?= @$_GET['pengaduan'] ?></textarea>
+                                    <textarea id="pengaduan" class="form-control" rows="4" name="pengaduan" placeholder="Tuliskan Isi Pengaduan" required><?= @$_GET['pengaduan'] ?></textarea>
                                 </div>
                                 <p class="error"><?= @$_GET['pengaduanError'] ?></p>
                             </div>
                         </div>
+                       
                         <div class="form-group">
                             <label for="captcha" class="col-sm-3 control-label">Captcha</label>
                             <div class="col-sm-9">
@@ -182,17 +194,19 @@ if ($statement->rowCount() < 1) {
                                 <p class="error"><?= @$_GET['captchaError'] ?></p>
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-3">
                                 <input id="submit" name="submit" type="submit" value="Kirim Pengaduan" class="btn btn-primary-custom form-shadow">
                             </div>
+                        
                         </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
                                 <p class="error"><em>* Catat Nomor Pengaduan Untuk Melihat Status Pengaduan</em></p>
                             </div>
                         </div>
-                    </form>
+                </form>
                 </div>
                 <div class="col-md-4"></div>
             </div>
@@ -221,11 +235,14 @@ if ($statement->rowCount() < 1) {
                 }
             </script>
             <!-- link to top -->
+            <!-- JS Emailjs -->
 
+            <!-- Akhir JS Emailjs -->
 
             <!-- /.section -->
             <hr>
-        </div>
+        
+     </div>
 
         <!-- Footer -->
         <footer class="footer text-center">
@@ -296,7 +313,14 @@ if ($statement->rowCount() < 1) {
     <script src="js/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="js/bootstrap.js"></script>
-
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script>
+        emailjs.init('ihk-bhWBWFsBDvKb7'); // Ganti dengan user ID EmailJS kamu
+    </script>
+    <script src="main.js"></script>
 </body>
 
 </html>

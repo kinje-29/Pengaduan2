@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Kirim Email</title>
+</head>
+<body>
+    <form id="email-from">
+        
+        <label for="to_email">Email Penerima</label>
+        <input type="email" name="to_email" id="to_email" required>
+
+        <label for="subject">Subjek</label>
+        <input type="text" name="subject" id="subject">
+
+        <label for="message">Pesan</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        
+        <button type="submit" id="button">Kirim</button>
+        
+    </form>
+
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script>
+        emailjs.init('ihk-bhWBWFsBDvKb7'); // Ganti dengan user ID EmailJS kamu
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

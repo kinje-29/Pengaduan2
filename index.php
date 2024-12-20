@@ -97,7 +97,7 @@ function RandomAvatar()
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav nav-link">
                         <li class="active"><a href="">HOME</a></li>
-                        <li><a href="lapor">LAPOR</a></li>
+                        <li><a href="lapor">LAPORAN</a></li>
                         <li><a href="lihat">LIHAT PENGADUAN</a></li>
                         <li><a href="cara">CARA</a></li>
                         <li class="dropdown">
