@@ -202,7 +202,7 @@ if (isset($_POST['Balas'])) {
                             </thead>
                             <tbody>
 
-                                <?php
+                            <?php
                                 // Ambil semua record dari tabel laporan
 
                                 if ($id_admin > 0) {
@@ -340,10 +340,20 @@ if (isset($_POST['Balas'])) {
                             <h5 class="modal-title">Balas Laporan</h5>
                         </div>
                         <div class="modal-body">
-                            <form method="post">
+                            <form id="email-js"method="post">
+                                <div class="form-group">
+                                    <p><b>Nomor Pengaduan:</b></p>
+                                    <?php echo $key['id']; ?>
+                                    <hr>
+                                </div>
                                 <div class="form-group">
                                     <p><b>Nama Pelapor:</b></p>
                                     <?php echo $key['nama']; ?>
+                                    <hr>
+                                </div>
+                                <div class="form-group">
+                                    <p><b>Email:</b></p>
+                                    <?php echo $key['email']; ?>
                                     <hr>
                                 </div>
                                 <div class="form-group">

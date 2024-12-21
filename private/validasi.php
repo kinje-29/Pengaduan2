@@ -1,4 +1,16 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// echo realpath('private/PHPMailer/src/Exception.php');
+// exit;
+
+require_once('C:/xampp/htdocs/pengaduan/private/PHPMailer/src/Exception.php');
+require_once('C:/xampp/htdocs/pengaduan/private/PHPMailer/src/PHPMailer.php');
+require_once('C:/xampp/htdocs/pengaduan/private/PHPMailer/src/SMTP.php');
+
+
+
 session_start();
 require_once("database.php");
 // header("Location: ../index?status=success");
@@ -18,7 +30,7 @@ if (isset($_POST['submit'])) {
     $is_valid  = true;
 
     validate_input();
-
+    // yvio myjc obvz xmzi
     // Proses unggah file foto jika ada
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
         $foto_tmp  = $_FILES['foto']['tmp_name'];
@@ -43,11 +55,102 @@ if (isset($_POST['submit'])) {
                 header:
                 $stmt->execute();
                 header(header: "Location: ../index?status=success");
+                send_email($nomor, $nama, $email, $telpon, $alamat, $tujuan, $pengaduan, $foto_path);
+                send_email_admin($nomor, $nama, $email, $telpon, $alamat, $tujuan, $pengaduan, $foto_path);
+
                 kirimForm();
+
             } elseif (!$is_valid){
                 header(header: "Location: ../lapor.php?nomor=$nomor&nama=$nama&namaError=$namaError&email=$email&emailError=$emailError&telepon=$telpon&telponError=$telponError&alamat=$alamat&alamatError=$alamatError&pengaduan=$pengaduan&pengaduanError=$pengaduanError&captcha=$captcha&capthcaError=$captchaError");
             }
         }
+    }
+}
+function send_email($nomor, $nama, $email, $telpon, $alamat, $tujuan, $pengaduan, $foto_path) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // Konfigurasi SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Host SMTP
+        $mail->SMTPAuth = true;
+        $mail->Username = 'fajar.vds@gmail.com'; // Email pengirim
+        $mail->Password = 'yvio myjc obvz xmzi'; // Password email pengirim (gunakan App Password jika pakai Gmail)
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Pengaturan email
+        $mail->setFrom('fajar.vds@gmail.com', 'Kelurahan Jayasampurna');
+        $mail->addAddress($email); // Email penerima
+        $mail->addAttachment($foto_path); // Lampirkan foto
+
+        // Konten email
+        $mail->isHTML(true);
+        $mail->Subject = "Nomor Pengaduan : $nomor";
+        $mail->Body = "
+            <p>Hallo $nama, kami dari pihak petugas kelurahan Jayasampuran telah menerima laporan yang anda berikan.
+            Petugas kami akan memeriksa langsung ke lolasi yang anda berikan dan berikut detail laporan yang anda berikan : <br></p>
+            <h3>Detail Pengaduan</h3>
+            <p><b>Nomor:</b> $nomor</p>
+            <p><b>Nama:</b> $nama</p>
+            <p><b>Email:</b> $email</p>
+            <p><b>Telpon:</b> $telpon</p>
+            <p><b>Alamat:</b> $alamat</p>
+            <p><b>Tujuan:</b> $tujuan</p>
+            <p><b>Isi Pengaduan:</b> <br>$pengaduan</p>
+            <hr>
+            <p>Untuk melihat tindak lanjut selanjutnya anda bisa melihat status Lihat pengaduan di situs web kami https://localhost/pengaduan/lihat dengan memasukan nomor pengaduan yang kami berikan  </p>
+            <p>Terkait laporan yang anda berikan kami akan menghubungi kembali melalui email/status laporan di websate kami.<br>
+            Terimaksi atas laporan yang anda berikan. <b>Kelurahan Jayasampurna</p>
+        ";
+
+        // Kirim email
+        $mail->send();
+        echo 'Pengaduan berhasil dikirim!';
+    } catch (Exception $e) {
+        echo "Pengaduan gagal dikirim. Error: {$mail->ErrorInfo}";
+    }
+}
+
+function send_email_admin($nomor, $nama, $email, $telpon, $alamat, $tujuan, $pengaduan, $foto_path) {
+    $email_admin = 'fajar.vds@gmail.com';
+    $mail = new PHPMailer(true);
+
+    try {
+        // Konfigurasi SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Host SMTP
+        $mail->SMTPAuth = true;
+        $mail->Username = 'fajar.vds@gmail.com'; // Email pengirim
+        $mail->Password = 'yvio myjc obvz xmzi'; // Password email pengirim (gunakan App Password jika pakai Gmail)
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Pengaturan email
+        $mail->setFrom('fajar.vds@gmail.com', 'Kelurahan Jayasampurna');
+        $mail->addAddress($email_admin); // Email penerima
+        $mail->addAttachment($foto_path); // Lampirkan foto
+
+        // Konten email
+        $mail->isHTML(true);
+        $mail->Subject = "Laporan Baru : $nomor";
+        $mail->Body = "
+            <h3>Laporan Baru Masuk</h3>
+            <p><b>Nomor Pengaduan :</b> $nomor</p>
+            <p><b>Nama Pelapor    :</b> $nama</p>
+            <p><b>Email Pelapor   :</b> $email</p>
+            <p><b>Telpon Pelapor  :</b> $telpon</p>
+            <p><b>Alamat Pelapor  :</b> $alamat</p>
+            <p><b>Tujuan Palapor  :</b> $tujuan</p>
+            <p><b>Isi Pengaduan   :</b> <br>$pengaduan</p>
+            <hr>
+        ";
+
+        // Kirim email
+        $mail->send();
+        echo 'Pengaduan berhasil dikirim!';
+    } catch (Exception $e) {
+        echo "Pengaduan gagal dikirim. Error: {$mail->ErrorInfo}";
     }
 }
 
