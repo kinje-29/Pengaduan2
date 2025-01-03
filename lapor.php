@@ -1,14 +1,42 @@
 <?php
 require_once("private/database.php");
+require 'auth.php';
+
+// Mulai session
+// session_start();
+
+// Pastikan pengguna sudah login
+if (!isset($_SESSION['id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Inisialisasi variabel nama dan email
+$nama = "";
+$email = "";
+
+try {
+    // Ambil data masyarakat berdasarkan user_id di session
+    $stmt = $db->prepare("SELECT nama, email FROM masyarakat WHERE id = :id");
+    $stmt->bindParam(':id', $_SESSION['id']);
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    // var_dump($data);
+
+    if ($data) {
+        $nama = htmlspecialchars($data['nama']);
+        $email = htmlspecialchars($data['email']);
+    }
+} catch (PDOException $e) {
+    die("Terjadi kesalahan: " . $e->getMessage());
+}
+
 $statement = $db->query("SELECT id FROM `laporan` ORDER BY id DESC LIMIT 1");
-// $cekk = $statement->fetch(PDO::FETCH_ASSOC);
 if ($statement->rowCount() > 0) {
     foreach ($statement as $key) {
-        // get max id from tabel laporan
         $max_id = $key['id'] + 1;
     }
-}
-if ($statement->rowCount() < 1) {
+} else {
     $max_id = 100;
 }
 ?>
@@ -68,6 +96,7 @@ if ($statement->rowCount() < 1) {
                         <li><a href="faq">FAQ</a></li>
                         <li><a href="bantuan">BANTUAN</a></li>
                         <li><a href="kontak">KONTAK</a></li>
+                        <li><a href="logout.php">Logout</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -97,7 +126,7 @@ if ($statement->rowCount() < 1) {
                                 <div class="col-sm-9">
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" value="<?= @$_GET['nama'] ?>" required>
+                                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" value="<?php echo $nama; @$_GET['name']?>" readonly required>
                                     </div>
                                     <p class="error"><?= @$_GET['namaError'] ?></p>
                                 </div>
@@ -108,7 +137,7 @@ if ($statement->rowCount() < 1) {
                                 <div class="col-sm-9">
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                                        <input type="email" class="form-control" id="to_email" name="email" placeholder="example@domain.com" value="<?= @$_GET['email'] ?>" required>
+                                        <input type="email" class="form-control" id="to_email" name="email" placeholder="example@domain.com" value="<?= @$_GET['email']; echo $email ?>" required>
                                     </div>
                                     <p class="error"><?= @$_GET['emailError'] ?></p>
                                 </div>

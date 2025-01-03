@@ -115,6 +115,15 @@ function RandomAvatar()
                         <li><a href="faq">FAQ</a></li>
                         <li><a href="bantuan">BANTUAN</a></li>
                         <li><a href="kontak">KONTAK</a></li>
+                        <li class="dropdown">
+                            <a href="ms" class="dropdown-togle" data-toggle="dropdown">MENU USER<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="meui">
+                                <li><a href="login.php">LOGIN</a></li>
+                                <li class="divider"></li>
+                                <li><a href="logout.php">LOGOUT</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li><a href="logout.php">Logout</a></li> -->
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

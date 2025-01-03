@@ -119,6 +119,7 @@ if (isset($_POST['submit'])) {
                         <li><a href="faq">FAQ</a></li>
                         <li><a href="bantuan">BANTUAN</a></li>
                         <li><a href="kontak">KONTAK</a></li>
+                        <li><a href="logout.php">Logout</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

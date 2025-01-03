@@ -5,9 +5,10 @@ use PHPMailer\PHPMailer\Exception;
 // echo realpath('private/PHPMailer/src/Exception.php');
 // exit;
 
-require_once('C:/xampp/htdocs/pengaduan/private/PHPMailer/src/Exception.php');
-require_once('C:/xampp/htdocs/pengaduan/private/PHPMailer/src/PHPMailer.php');
-require_once('C:/xampp/htdocs/pengaduan/private/PHPMailer/src/SMTP.php');
+// Memanggil libary PhpMailer
+require_once('C:/xampp/htdocs/pengaduan2/private/PHPMailer/src/Exception.php');
+require_once('C:/xampp/htdocs/pengaduan2/private/PHPMailer/src/PHPMailer.php');
+require_once('C:/xampp/htdocs/pengaduan2/private/PHPMailer/src/SMTP.php');
 
 
 
